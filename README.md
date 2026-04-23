@@ -3,6 +3,8 @@
 ## Key Insight
 Customer churn is driven more by usage behavior and device characteristics than by service quality issues—challenging the initial business assumption.
 
+## Key Result
+The model identifies ~73% of churners, enabling proactive customer retention and reducing missed at-risk customers.
 ---
 
 ## Project Overview
