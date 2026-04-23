@@ -31,7 +31,7 @@ The focus is not only on prediction, but on generating actionable insights and o
 ---
 
 ## Dataset
-- Source: SNHU Capstone Case Study  
+- Source: Simulated telecommunications customer dataset  
 - Observations: ~831 customer records  
 - Target variable: Customer churn (binary classification)  
 - Features: Usage behavior, device attributes, service interactions  
