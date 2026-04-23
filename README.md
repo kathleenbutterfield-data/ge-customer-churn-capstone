@@ -63,6 +63,30 @@ The focus is not only on prediction, but on generating actionable insights and o
 
 ---
 
+## Key Visuals
+
+These visuals summarize model performance and business interpretability.
+
+### 1. Model Performance (ROC Curve)
+![ROC Curve](visuals/roc-curve.png)
+
+The ROC curve shows the model performs better than random classification with an AUC of ~0.64–0.66.
+
+---
+
+### 2. Classification Results (Confusion Matrix)
+![Confusion Matrix](visuals/confusion-matrix.png)
+
+The model identifies a high proportion of churners using a 0.419 threshold, prioritizing recall for retention use cases.
+
+---
+
+### 3. Key Drivers of Churn
+![Feature Importance](visuals/churn-feature-importance.png)
+
+Usage behavior (MOU) and device characteristics (REFURB, EQPDAYS) are the strongest predictors of churn.
+---
+
 ## Key Drivers of Churn
 - Mean Monthly Usage (MOU)  
 - Refurbished Device Status (REFURB)  
