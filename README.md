@@ -23,8 +23,7 @@ The focus is not only on prediction, but on generating actionable insights and o
 ---
 
 ## Business Questions
-- What factors drive customer churn?  
-- Can churn be predicted reliably?  
+- What factors drive customer churn?    
 - Are service issues the primary cause of churn?  
 - How can retention strategies be optimized using predictive modeling?  
 
