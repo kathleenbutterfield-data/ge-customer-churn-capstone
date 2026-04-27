@@ -29,13 +29,18 @@ The focus is not only on prediction, but on generating actionable insights and o
 
 ---
 
-## Dataset
-- Source: Simulated telecommunications customer dataset  
-- Observations: ~831 customer records  
-- Target variable: Customer churn (binary classification)  
-- Features: Usage behavior, device attributes, service interactions  
+## Data
 
-*Note: Dataset is not publicly available due to licensing restrictions.*
+**Source:** Simulated telecommunications customer dataset designed for churn analysis.
+
+* **Observations:** ~831 customer records
+* **Target Variable:** Customer churn (binary classification)
+* **Features:** Usage behavior, device attributes, and service interaction metrics
+
+**Availability:**
+The dataset is not publicly available and is not included in this repository due to usage restrictions.
+
+A synthetic dataset may be added in the future to support reproducibility.
 
 ---
 
