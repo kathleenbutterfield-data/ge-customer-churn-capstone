@@ -35,7 +35,7 @@ The focus is not only on prediction, but on generating actionable insights and o
 - Target variable: Customer churn (binary classification)  
 - Features: Usage behavior, device attributes, service interactions  
 
-*Note: Dataset is not publicly available due to academic licensing restrictions.*
+*Note: Dataset is not publicly available due to licensing restrictions.*
 
 ---
 
