@@ -1,0 +1,56 @@
+# =========================
+# TRAIN / TEST SPLIT
+# =========================
+
+train <- churn_data[churn_data$CALIBRAT == 1, ]
+test  <- churn_data[churn_data$CALIBRAT == 0, ]
+
+train <- subset(train, select = -c(CHURN, CALIBRAT))
+test  <- subset(test, select = -c(CALIBRAT, CHURNDEP))
+
+train$CHURNDEP <- as.factor(train$CHURNDEP)
+test$CHURN <- as.factor(test$CHURN)
+
+# =========================
+# FULL MODEL
+# =========================
+
+full_model <- glm(CHURNDEP ~ ., data = train, family = binomial)
+
+# =========================
+# STEPWISE MODEL
+# =========================
+
+step_model <- step(full_model, direction = "both")
+
+summary(step_model)
+
+# =========================
+# BASELINE TRAIN MODEL CHECK
+# =========================
+
+pred_prob_train <- predict(step_model, newdata = train, type = "response")
+pred_class_train <- ifelse(pred_prob_train > 0.5, 1, 0)
+
+confusionMatrix(factor(pred_class_train, levels = c(0,1)),
+                train$CHURNDEP,
+                positive = "1")
+
+roc_train <- roc(train$CHURNDEP, pred_prob_train)
+plot(roc_train, main = "ROC - Training")
+auc(roc_train)
+
+# =========================
+# VERIFY DATA (BASE MODEL)
+# =========================
+
+verify_prob <- predict(step_model, newdata = verify_data, type = "response")
+verify_class <- ifelse(verify_prob > 0.5, 1, 0)
+
+roc_verify <- roc(verify_data$CHURN, verify_prob)
+plot(roc_verify, main = "ROC - Verify")
+auc(roc_verify)
+
+confusionMatrix(factor(verify_class, levels = c(0,1)),
+                verify_data$CHURN,
+                positive = "1")
