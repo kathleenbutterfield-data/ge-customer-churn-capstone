@@ -1,0 +1,70 @@
+# =========================
+# EXPLORATORY DATA ANALYSIS
+# =========================
+
+eda_data <- subset(churn_data, select = -c(CALIBRAT, CHURNDEP))
+
+# Summary statistics
+summary(eda_data)
+
+# Churn distribution
+table(churn_data$CHURN)
+
+# Boxplot (outliers)
+boxplot(eda_data,
+        main = "Outliers: Variable Exploration",
+        las = 2,
+        cex.axis = 0.6)
+
+# =========================
+# OUTLIERS (MOU EXAMPLE)
+# =========================
+
+x <- churn_data$MOU
+
+Q1 <- quantile(x, 0.25, na.rm = TRUE)
+Q3 <- quantile(x, 0.75, na.rm = TRUE)
+IQR_value <- IQR(x, na.rm = TRUE)
+
+lower_bound <- Q1 - 1.5 * IQR_value
+upper_bound <- Q3 + 1.5 * IQR_value
+
+outliers <- x[x < lower_bound | x > upper_bound]
+length(outliers)
+
+# =========================
+# CORRELATION HEATMAP
+# =========================
+
+numeric_vars <- churn_data[, sapply(churn_data, is.numeric)]
+cor_matrix <- cor(numeric_vars, use = "pairwise.complete.obs")
+
+ggcorrplot(cor_matrix,
+           hc.order = TRUE,
+           lab = TRUE,
+           type = "lower",
+           colors = c("#6D9EC1", "white", "yellow"),
+           title = "Correlation Heatmap")
+
+# =========================
+# CHURN COMPARISON
+# =========================
+
+churn_mean <- colMeans(eda_data[eda_data$CHURN == 1,
+                               sapply(eda_data, is.numeric)])
+
+nonchurn_mean <- colMeans(eda_data[eda_data$CHURN == 0,
+                                  sapply(eda_data, is.numeric)])
+
+churn_mean <- churn_mean[names(churn_mean) != "CHURN"]
+nonchurn_mean <- nonchurn_mean[names(nonchurn_mean) != "CHURN"]
+
+bar_data <- rbind(churn_mean, nonchurn_mean)
+rownames(bar_data) <- c("Churners", "Non-Churners")
+
+barplot(bar_data,
+        beside = TRUE,
+        col = c("#FFDE21", "#ADD8E6"),
+        main = "Churn vs Non-Churn Means",
+        las = 2,
+        cex.names = 0.6)
