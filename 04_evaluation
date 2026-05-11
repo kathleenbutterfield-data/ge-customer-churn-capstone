@@ -1,0 +1,26 @@
+# =========================
+# THRESHOLD TUNING (TRAIN)
+# =========================
+
+threshold <- 0.419
+
+pred_class_419 <- ifelse(pred_prob_train > threshold, 1, 0)
+
+confusionMatrix(factor(pred_class_419, levels = c(0,1)),
+                train$CHURNDEP,
+                positive = "1")
+
+roc_419 <- roc(train$CHURNDEP, pred_prob_train)
+auc(roc_419)
+
+# =========================
+# TEST SET FINAL EVALUATION
+# =========================
+
+test_prob <- predict(step_model, newdata = test, type = "response")
+
+test_class_419 <- ifelse(test_prob > 0.419, 1, 0)
+
+confusionMatrix(factor(test_class_419, levels = c(0,1)),
+                test$CHURN,
+                positive = "1")
